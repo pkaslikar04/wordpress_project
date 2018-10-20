@@ -1,0 +1,28 @@
+---
+# tasks file for Update all & Install packages
+- name: Update all packages
+  yum: 
+   name: '*'
+   state: latest 
+- name: Install the Development tools & Update Repo
+  yum: 
+   name: "{{ update_repo }}"
+   state: present
+  vars:
+    update_repo:
+    - "@Development tools"
+    - http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+- name: Install the following packages
+  yum:
+   name: "{{ packages }}"
+   state: present
+  vars:
+    packages:
+    - screen
+    - vim
+    - htop
+    - git
+    - atop
+    - ntp
+    - unbound
+    - monit

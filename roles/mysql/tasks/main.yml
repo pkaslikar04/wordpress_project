@@ -1,0 +1,17 @@
+---
+# tasks file for mysql
+- name: Install the Percona-Server Mysql 5.7
+  yum: 
+   name: "{{ update_repo }}"
+   state: present
+  vars:
+    update_repo:
+    - libaio
+    - https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.23-23/binary/redhat/7/x86_64/Percona-Server-client-57-5.7.23-23.1.el7.x86_64.rpm
+    - https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.23-23/binary/redhat/7/x86_64/Percona-Server-server-57-5.7.23-23.1.el7.x86_64.rpm
+    - https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.23-23/binary/redhat/7/x86_64/Percona-Server-shared-57-5.7.23-23.1.el7.x86_64.rpm
+    - https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.23-23/binary/redhat/7/x86_64/Percona-Server-shared-compat-57-5.7.23-23.1.el7.x86_64.rpm
+    - https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.23-23/binary/redhat/7/x86_64/Percona-Server-rocksdb-57-5.7.23-23.1.el7.x86_64.rpm
+
+- include: handlers/main.yml
+  notify: start mysqld

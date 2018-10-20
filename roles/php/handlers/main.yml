@@ -1,0 +1,7 @@
+---
+# handlers file for php
+- name: start php-fpm
+  service: name=php-fpm enabled=yes state=restarted
+
+- name: start nginx
+  service: name=nginx enabled=yes state=restarted

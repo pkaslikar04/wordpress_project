@@ -1,0 +1,29 @@
+---
+# tasks file for php
+- name: Install php-fpm 7.1 && nginx 1.14
+  yum:
+   name: "{{ update_repo }}"
+   state: installed
+  vars:
+    update_repo:
+    - https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+    - https://nginx.org/packages/rhel/7/x86_64/RPMS/nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
+
+- name: Install required php packages
+  shell: 'yum install -y php71w php71w-curl php71w-common php71w-cli php71w-mysql php71w-mbstring php71w-fpm php71w-xml php71w-pdo php71w-zip'
+
+- name: Configure php fpm
+  copy: src=files/www.conf dest=/etc/php-fpm.d/www.conf
+
+- name: Configure php ini file
+  copy: src=files/php.ini dest=/etc/php.ini
+
+- name: Configure default conf of nginx webserver
+  copy: src=files/default.conf dest=/etc/nginx/conf.d/default.conf
+
+- name: Configure phpinfo to  check php information
+  copy: src=files/phpinfo.php dest=/usr/share/nginx/html/wordpress/phpinfo.php
+  
+- include: handlers/main.yml
+  notify: start php-fpm
+  notify: start nginx

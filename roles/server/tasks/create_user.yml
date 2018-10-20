@@ -1,0 +1,13 @@
+---
+# tasks file for Create a user named johndoe with a 2048 bits SSH key
+- name: Create the user 'johndoe'
+  user:
+    name: johndoe
+    state: present
+    remove: yes
+- name: Create a 2048-bit SSH key for user johndoe in ~johndoe/.ssh/id_rsa
+  user:
+    name: johndoe
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
