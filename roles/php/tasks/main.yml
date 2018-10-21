@@ -24,7 +24,12 @@
   copy: src=files/phpinfo.php dest=/usr/share/nginx/html/wordpress/phpinfo.php
 
 - name: Creating dir under /run
-  shell: 'mkdir /run/php'
+  file:
+    path: /run/php
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
 
 - include: handlers/main.yml
   notify: start php-fpm
