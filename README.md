@@ -8,8 +8,7 @@ servername
 2) Execute setup.yml 
 
 # Verification
-1) Try to access below URL to check whether DB is connecting or not. 
-
+1) Try to access below URL to check php related information
 wordpress/phpinfo.php
 
 2) Then check URL 
